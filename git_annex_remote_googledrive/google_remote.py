@@ -42,6 +42,7 @@ from annexremote import RemoteError
 
 from pathlib import Path
 import logging
+logging.basicConfig(level=logging.DEBUG)
 
 def NotAFolderError(Exception):
     pass

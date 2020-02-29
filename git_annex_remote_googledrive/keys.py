@@ -108,6 +108,15 @@ class Key():
 
     def upload(self, local_filename: str, chunksize: int = None, progress_handler: callable = None):
 
+        # debugging checksum errors with encrypted chunks
+        import hashlib
+        file_hash = hashlib.md5()
+        with open(local_filename, "rb") as f:
+            while chunk := f.read(8192):
+                file_hash.update(chunk)
+        logging.debug("File MD5: %s", file_hash.hexdigest())
+
+
         try:
             self.file.upload(local_filename,
                              chunksize=chunksize,
